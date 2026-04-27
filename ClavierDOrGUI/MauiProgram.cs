@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
+using Microsoft.EntityFrameworkCore;
+using ClavierDOrGUI.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ClavierDOrGUI;
 
@@ -20,6 +23,24 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        return builder.Build();
+        // Configure SQLite DbContext
+        var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "clavierdor.db");
+        builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlite($"Data Source={dbPath}"));
+
+        // Register database related services
+        builder.Services.AddSingleton<CsvQuestionSeeder>();
+        builder.Services.AddSingleton<DatabaseService>();
+
+        var app = builder.Build();
+
+        // Initialize DB and seed synchronously on startup
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbService = scope.ServiceProvider.GetRequiredService<DatabaseService>();
+            dbService.InitializeAsync().GetAwaiter().GetResult();
+        }
+
+        return app;
     }
 }
