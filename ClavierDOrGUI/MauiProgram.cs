@@ -32,6 +32,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<CsvQuestionSeeder>();
         builder.Services.AddSingleton<DatabaseService>();
 
+        // Register game services
+        builder.Services.AddScoped<Services.ScoreService>();
+        builder.Services.AddScoped<Services.GameService>();
+
         var app = builder.Build();
 
         // Initialize DB and seed synchronously on startup
