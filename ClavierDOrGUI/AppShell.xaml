@@ -4,11 +4,24 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ClavierDOrGUI"
+    xmlns:views="clr-namespace:ClavierDOrGUI.Views"
     Title="ClavierDOrGUI">
 
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <!-- Main menu -->
+    <ShellContent
+        Title="Menu"
+        ContentTemplate="{DataTemplate views:MainMenuPage}"
+        Route="MainMenuPage" />
+
+    <!-- New Game -->
+    <ShellContent
+        Title="Nouvelle partie"
+        ContentTemplate="{DataTemplate views:NewGamePage}"
+        Route="NewGamePage" />
 
 </Shell>

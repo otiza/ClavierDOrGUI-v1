@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ClavierDOrGUI.ViewModels"
+             x:Class="ClavierDOrGUI.Views.NewGamePage"
+             Title="Nouvelle partie">
+
+    <ContentPage.BindingContext>
+        <vm:NewGameViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+        <Label Text="Nouvelle partie" FontSize="24" HorizontalOptions="Center" />
+
+        <Entry Placeholder="Nom du joueur" Text="{Binding PlayerName}" />
+
+        <Label Text="Rôle" />
+        <Picker ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}" />
+
+        <Button Text="Démarrer" Command="{Binding StartGameCommand}" />
+        <Button Text="Annuler" Command="{Binding CancelCommand}" />
+    </VerticalStackLayout>
+
+</ContentPage>
+

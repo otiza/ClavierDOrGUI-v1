@@ -35,6 +35,8 @@ public static class MauiProgram
         // Register game services
         builder.Services.AddScoped<Services.ScoreService>();
         builder.Services.AddScoped<Services.GameService>();
+        // Register ViewModels
+        builder.Services.AddTransient<ViewModels.NewGameViewModel>();
 
         var app = builder.Build();
 
